@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+//using System.Diagnostics;
 
 public class PlayerStatusManager : MonoBehaviour
 {
@@ -30,6 +31,7 @@ public class PlayerStatusManager : MonoBehaviour
     {
         mentalHealthBar.value = mentalHealth;
         energyBar.value = energy;
+       // GameManager.Instance.foodAmount = foodCount;
         UpdateMoneyDisplay();
         UpdateFoodDisplay();
     }
@@ -54,9 +56,19 @@ public class PlayerStatusManager : MonoBehaviour
 
     public void Eat()
     {
-        energy += eatEffect;
-        energy = Mathf.Clamp(energy, 0, 100); 
-        Debug.Log("Player ate, energy restored.");
+        if (foodCount != 0)//if food count is 0, no more food
+        {
+            foodCount--;
+            //foodCount;
+            energy += eatEffect;
+            energy = Mathf.Clamp(energy, 0, 100);
+            Debug.Log("Player ate, energy restored.");
+            UpdateFoodDisplay();
+        }
+        else
+        {
+            Debug.Log("Buy more food.");
+        }
     }
 
     public void Work()
