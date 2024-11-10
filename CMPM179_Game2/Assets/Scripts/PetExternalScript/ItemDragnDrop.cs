@@ -7,6 +7,7 @@ using System.Diagnostics;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
+//Multiple Handlers needed to allow Unity style dragging
 public class ItemDragnDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEndDragHandler, IDragHandler
 {
     [SerializeField] private Canvas canvas;
@@ -16,7 +17,7 @@ public class ItemDragnDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandl
     private void Awake()
     {
         rectTransform = GetComponent<RectTransform>();
-        canvasGroup = GetComponent<CanvasGroup>();
+        canvasGroup = GetComponent<CanvasGroup>();//used to block raycasts during the drag.  Needed if prevent blocking pointer events
     }
     public void OnBeginDrag(PointerEventData eventData)
     {
@@ -32,7 +33,6 @@ public class ItemDragnDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandl
     public void OnDrag(PointerEventData eventData)
     {
         UnityEngine.Debug.Log("dragging");
-        //eventData.pointerDrag.transform.position = this.transform.position;
        
         //We set the globalMousePosition using the cursor location
         //followed by converting it into the world coordinates.
@@ -45,7 +45,6 @@ public class ItemDragnDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandl
         }
 
         
-        //rectTransform.anchoredPosition += eventData.delta / canvas.scaleFactor; //Change the position of the object while dragging and dropping within the confines of the canvas object.
     }
 
     public void OnEndDrag(PointerEventData eventData)
