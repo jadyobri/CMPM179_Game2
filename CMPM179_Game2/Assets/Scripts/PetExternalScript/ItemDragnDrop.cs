@@ -13,11 +13,13 @@ public class ItemDragnDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandl
     [SerializeField] private Canvas canvas;
     private RectTransform rectTransform;
     private CanvasGroup canvasGroup;
+    private Vector3 startPos;
 
     private void Awake()
     {
         rectTransform = GetComponent<RectTransform>();
         canvasGroup = GetComponent<CanvasGroup>();//used to block raycasts during the drag.  Needed if prevent blocking pointer events
+        startPos = transform.position;
     }
     public void OnBeginDrag(PointerEventData eventData)
     {
@@ -29,7 +31,8 @@ public class ItemDragnDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandl
         {
             canvasGroup.blocksRaycasts = false;
         }
-     }
+        startPos = transform.position;
+    }
     public void OnDrag(PointerEventData eventData)
     {
         UnityEngine.Debug.Log("dragging");
@@ -54,6 +57,7 @@ public class ItemDragnDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandl
         {
             canvasGroup.blocksRaycasts = true;
         }
+        transform.position = startPos;
     }
 
     public void OnPointerDown(PointerEventData eventData)
