@@ -6,7 +6,7 @@ using System.Diagnostics;
 //using System.Diagnostics;
 using UnityEngine;
 using UnityEngine.EventSystems;
-public class PettingFunction : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEndDragHandler, IDragHandler
+public class PettingFunction : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEndDragHandler, IDragHandler, IPointerUpHandler
 {
     public PetStatusManager petStatusManager;
 
@@ -30,6 +30,11 @@ public class PettingFunction : MonoBehaviour, IPointerDownHandler, IBeginDragHan
     public void OnPointerDown(PointerEventData eventData)
     {
         GameManager.Instance.isPet = true;
+        UnityEngine.Debug.Log("Starting");
+    }
+    public void OnPointerUp(PointerEventData eventData)
+    {
+        GameManager.Instance.isPet = false;
         UnityEngine.Debug.Log("Starting");
     }
 }

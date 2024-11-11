@@ -1,4 +1,6 @@
+using TMPro;
 using UnityEngine;
+using static UnityEngine.RuleTile.TilingRuleOutput;
 
 public class CatMovement : MonoBehaviour
 {
@@ -16,6 +18,8 @@ public class CatMovement : MonoBehaviour
 
     void Update()
     {
+       
+
         if (!GameManager.Instance.isPet)
         {
             // Check if any mouse button is clicked
@@ -26,7 +30,6 @@ public class CatMovement : MonoBehaviour
                 mousePosition.z = 0; // Ensure the z-coordinate remains the same for 2D movement
 
                 targetPosition = new Vector3(mousePosition.x, transform.position.y, mousePosition.z);  // Set the target position to the mouse position
-
                 Debug.Log("Target Position: " + targetPosition);
 
                 // Flip the cat sprite based on the target position
@@ -48,6 +51,7 @@ public class CatMovement : MonoBehaviour
                     }
                     transform.localScale = new Vector3(xset, transform.localScale.y, transform.localScale.z); // Restore the original scale
                 }
+                
 
                 // Uncomment if using animation
                 animator.SetBool("isWalking", true);
@@ -57,15 +61,15 @@ public class CatMovement : MonoBehaviour
             // Move the cat towards the target position if it's walking
             if (isWalking)
             {
-                // Calculate the step size for this frame
                 float step = moveSpeed * Time.deltaTime;
-
+            
                 // Move the cat towards the target position
                 // Vector3 position = transform.position;
                 //position.x += speed * Time.deltaTime; // Change 'speed' to control how fast it moves
                 //transform.position = position;
-
+                
                 transform.position = Vector3.MoveTowards(transform.position, targetPosition, step);
+                //uiElement.anchoredPosition = canvasPosition;
 
                 // Stop walking if the cat is close to the target
                 if (Vector3.Distance(transform.position, targetPosition) < 0.1f)
