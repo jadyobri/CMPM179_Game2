@@ -73,14 +73,23 @@ public class PlayerStatusManager : MonoBehaviour
 
     public void Work()
     {
-        mentalHealth += workEffectMentalHealth; // Decreases mental health
-        energy += workEffectEnergy;             // Decreases energy
-        money += workMoneyEarned;               // Adds money when working
+        if (energy >= -(workEffectEnergy) && mentalHealth >= -(workEffectMentalHealth))
+        {
+            mentalHealth += workEffectMentalHealth; // Decreases mental health
+            energy += workEffectEnergy;             // Decreases energy
+            money += workMoneyEarned;               // Adds money when working
 
-        mentalHealth = Mathf.Clamp(mentalHealth, 0, 100);
-        energy = Mathf.Clamp(energy, 0, 100);
-        UpdateMoneyDisplay(); 
-        Debug.Log("Player worked, mental health and energy decreased, money earned.");
+            mentalHealth = Mathf.Clamp(mentalHealth, 0, 100);
+            energy = Mathf.Clamp(energy, 0, 100);
+            UpdateMoneyDisplay();
+            Debug.Log("Player worked, mental health and energy decreased, money earned.");
+            Debug.Log(energy);
+            Debug.Log(workEffectEnergy);
+        }
+        else
+        {
+            Debug.Log("Player too tired. No money earned");
+        }
     }
 
     void UpdateMoneyDisplay()
