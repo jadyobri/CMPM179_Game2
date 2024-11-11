@@ -29,11 +29,21 @@ public class CatMovement : MonoBehaviour
             // Flip the cat sprite based on the target position
             if (targetPosition.x < transform.position.x)  // If the mouse is to the left
             {
-                transform.localScale = new Vector3(-1, 1, 1); // Flip the sprite
+                float xset = -1 * transform.localScale.x;
+                if (xset > transform.localScale.x)
+                {
+                    xset *= -1;
+                }
+                transform.localScale = new Vector3(xset, transform.localScale.y, transform.localScale.z); // Flip the sprite
             }
             else if (targetPosition.x > transform.position.x)  // If the mouse is to the right
             {
-                transform.localScale = new Vector3(1, 1, 1); // Restore the original scale
+                float xset = -1 * transform.localScale.x;
+                if (xset < transform.localScale.x)
+                {
+                    xset *= -1;
+                }
+                transform.localScale = new Vector3(xset, transform.localScale.y, transform.localScale.z); // Restore the original scale
             }
 
             // Uncomment if using animation
