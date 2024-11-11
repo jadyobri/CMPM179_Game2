@@ -6209,6 +6209,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 3
+  meow: {fileID: 2124615520}
 --- !u!95 &1814430072
 Animator:
   serializedVersion: 7

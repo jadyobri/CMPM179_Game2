@@ -1,4 +1,5 @@
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using static UnityEngine.RuleTile.TilingRuleOutput;
 
@@ -9,11 +10,19 @@ public class CatMovement : MonoBehaviour
     private Vector3 targetPosition; // The target position the cat is moving to
     private bool isWalking;        // Whether the cat is currently walking
 
+
+    public TextMeshProUGUI meow;
+    private RectTransform textRectTransform;
+
+
     void Start()
     {
         animator = GetComponent<Animator>();
         targetPosition = transform.position;  // Initially, target is where the cat is
         GameManager.Instance.isPet = false;
+
+        //meow text contains rectTransform
+        textRectTransform = meow.GetComponent<RectTransform>();
     }
 
     void Update()
@@ -81,5 +90,9 @@ public class CatMovement : MonoBehaviour
                 }
             }
         }
+
+        // Get Screen position of text and moves it
+        Vector3 screenPosition = Camera.main.WorldToScreenPoint(transform.position);
+        textRectTransform.position = new Vector3(screenPosition.x, textRectTransform.position.y, textRectTransform.position.z);
     }
 }
