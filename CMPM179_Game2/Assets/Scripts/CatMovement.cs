@@ -22,7 +22,7 @@ public class CatMovement : MonoBehaviour
             Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             mousePosition.z = 0; // Ensure the z-coordinate remains the same for 2D movement
 
-            targetPosition = mousePosition;  // Set the target position to the mouse position
+            targetPosition = new Vector3(mousePosition.x, transform.position.y, mousePosition.z);  // Set the target position to the mouse position
 
             Debug.Log("Target Position: " + targetPosition);
 
@@ -58,6 +58,10 @@ public class CatMovement : MonoBehaviour
             float step = moveSpeed * Time.deltaTime;
 
             // Move the cat towards the target position
+           // Vector3 position = transform.position;
+            //position.x += speed * Time.deltaTime; // Change 'speed' to control how fast it moves
+            //transform.position = position;
+
             transform.position = Vector3.MoveTowards(transform.position, targetPosition, step);
 
             // Stop walking if the cat is close to the target
