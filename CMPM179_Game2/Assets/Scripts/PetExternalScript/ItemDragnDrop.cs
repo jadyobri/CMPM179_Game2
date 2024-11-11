@@ -8,7 +8,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 
 //Multiple Handlers needed to allow Unity style dragging
-public class ItemDragnDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEndDragHandler, IDragHandler
+public class ItemDragnDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEndDragHandler, IDragHandler, IPointerUpHandler
 {
     [SerializeField] private Canvas canvas;
     private RectTransform rectTransform;
@@ -40,14 +40,15 @@ public class ItemDragnDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandl
         //We set the globalMousePosition using the cursor location
         //followed by converting it into the world coordinates.
         Vector3 globalMousePos;
+
         if (RectTransformUtility.ScreenPointToWorldPointInRectangle(
             canvas.transform as RectTransform, eventData.position,
             eventData.pressEventCamera, out globalMousePos))
         {
             rectTransform.position = globalMousePos;
         }
+        UnityEngine.Debug.Log(globalMousePos);
 
-        
     }
 
     public void OnEndDrag(PointerEventData eventData)
@@ -62,7 +63,13 @@ public class ItemDragnDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandl
 
     public void OnPointerDown(PointerEventData eventData)
     {
+        GameManager.Instance.isPet = true;
         UnityEngine.Debug.Log("pointer");
+    }
+    public void OnPointerUp(PointerEventData eventData)
+    {
+        GameManager.Instance.isPet = false;
+        UnityEngine.Debug.Log("Starting");
     }
 }
 
