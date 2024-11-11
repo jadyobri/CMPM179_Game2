@@ -23,11 +23,13 @@ public class PettingFunction : MonoBehaviour, IPointerDownHandler, IBeginDragHan
 
     public void OnEndDrag(PointerEventData eventData)
     {
+        GameManager.Instance.isPet = false;
         UnityEngine.Debug.Log("petting up");
     }
 
     public void OnPointerDown(PointerEventData eventData)
     {
+        GameManager.Instance.isPet = true;
         UnityEngine.Debug.Log("Starting");
     }
 }
