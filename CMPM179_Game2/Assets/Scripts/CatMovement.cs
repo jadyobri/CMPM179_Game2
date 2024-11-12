@@ -37,17 +37,17 @@ public class CatMovement : MonoBehaviour
                 // Convert mouse position to world position
                // Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                 mousePosition.z = 0; // Ensure the z-coordinate remains the same for 2D movement
-
+                
                 targetPosition = new Vector3(mousePosition.x, transform.position.y, mousePosition.z);  // Set the target position to the mouse position
                 
 
                 // Flip the cat sprite based on the target position
                 if (targetPosition.x < transform.position.x)  // If the mouse is to the left
                 {
-                    float xset = -1 * transform.localScale.x;
+                    float xset = -1 * transform.localScale.x; // storing the current size, but putting it in a variable
                     if (xset > transform.localScale.x)
                     {
-                        xset *= -1;
+                        xset *= -1;// used to prevent flipping mid movement
                     }
                     transform.localScale = new Vector3(xset, transform.localScale.y, transform.localScale.z); // Flip the sprite
                 }
@@ -60,7 +60,7 @@ public class CatMovement : MonoBehaviour
                     }
                     transform.localScale = new Vector3(xset, transform.localScale.y, transform.localScale.z); // Restore the original scale
                 }
-                
+
 
                 // Uncomment if using animation
                 
