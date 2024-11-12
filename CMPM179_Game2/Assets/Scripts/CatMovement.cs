@@ -63,20 +63,21 @@ public class CatMovement : MonoBehaviour
                 
 
                 // Uncomment if using animation
-                animator.SetBool("isWalking", true);
+                
                 isWalking = true;  // Start walking
             }
 
             // Move the cat towards the target position if it's walking
             if (isWalking)
             {
+
+                animator.SetBool("isWalking", true);
                 float step = moveSpeed * Time.deltaTime;
-            
                 // Move the cat towards the target position
                 // Vector3 position = transform.position;
                 //position.x += speed * Time.deltaTime; // Change 'speed' to control how fast it moves
                 //transform.position = position;
-                
+
                 transform.position = Vector3.MoveTowards(transform.position, targetPosition, step);
                 //uiElement.anchoredPosition = canvasPosition;
 
