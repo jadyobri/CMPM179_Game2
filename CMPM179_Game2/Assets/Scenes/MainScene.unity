@@ -5355,6 +5355,7 @@ GameObject:
   - component: {fileID: 1579557196}
   - component: {fileID: 1579557198}
   - component: {fileID: 1579557199}
+  - component: {fileID: 1579557200}
   m_Layer: 0
   m_Name: CatSprite
   m_TagString: Untagged
@@ -5554,6 +5555,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   petStatusManager: {fileID: 1482158982}
   playerStatusManager: {fileID: 1185362766}
+--- !u!114 &1579557200
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1579557192}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 608199d809c7748ae8c753d03a566f3e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 3
+  meow: {fileID: 2124615520}
 --- !u!1 &1592868289
 GameObject:
   m_ObjectHideFlags: 0
@@ -6291,7 +6306,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1814430069}
-  - component: {fileID: 1814430070}
   - component: {fileID: 1814430072}
   - component: {fileID: 1814430073}
   m_Layer: 0
@@ -6311,26 +6325,12 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0.000061035156, y: -2.960022, z: 0}
-  m_LocalScale: {x: 7, y: 7, z: 1}
+  m_LocalScale: {x: 12, y: 12, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1579557193}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1814430070
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1814430068}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 608199d809c7748ae8c753d03a566f3e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed: 3
-  meow: {fileID: 2124615520}
 --- !u!95 &1814430072
 Animator:
   serializedVersion: 7
