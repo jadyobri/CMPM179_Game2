@@ -6,6 +6,7 @@ public class FoodLogic : MonoBehaviour, IDropHandler
 
     public PetStatusManager petStatusManager;
     public PlayerStatusManager playerStatusManager;
+
     public void OnDrop(PointerEventData eventData)
     {
         //UnityEngine.Debug.Log("Dropped");
@@ -14,12 +15,14 @@ public class FoodLogic : MonoBehaviour, IDropHandler
         
          if (droppedObject.CompareTag("Food"))
          {
-            UnityEngine.Debug.Log("Item Dropped on: " + droppedObject.tag);
-            UnityEngine.Debug.Log("Food count: " + playerStatusManager.foodCount);
-            if(playerStatusManager.foodCount != 0)
-            UnityEngine.Debug.Log("true here");
+            
 
             playerStatusManager.FeedPet();
-         }
+            //food = droppedObject.GetComponent<GameObject>();
+           // if (playerStatusManager.foodCount == 0)
+             //   droppedObject.SetActive(false);
+
+
+        }
     }
 }

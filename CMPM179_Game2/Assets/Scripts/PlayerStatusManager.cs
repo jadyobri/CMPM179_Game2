@@ -23,7 +23,10 @@ public class PlayerStatusManager : MonoBehaviour
     public float workEffectMentalHealth; // Mental health decrease when working
     public float workEffectEnergy;       // Energy decrease when working
     public float workMoneyEarned;         // Money earned when working
-    public int foodPrice;  
+    public int foodPrice;
+    public GameObject Food;
+    public ItemDragnDrop foodDrop;
+
 
     public PetStatusManager petStatusManager; // Figured out how to bring another script over!
 
@@ -31,7 +34,11 @@ public class PlayerStatusManager : MonoBehaviour
     {
         mentalHealthBar.value = mentalHealth;
         energyBar.value = energy;
-       // GameManager.Instance.foodAmount = foodCount;
+        // GameManager.Instance.foodAmount = foodCount;
+        if (Food)
+        {
+            foodDrop = Food.GetComponent<ItemDragnDrop>();
+        }
         UpdateMoneyDisplay();
         UpdateFoodDisplay();
     }
@@ -99,15 +106,29 @@ public class PlayerStatusManager : MonoBehaviour
 
     void UpdateFoodDisplay()
     {
-        foodText.text = "Food: " + foodCount.ToString(); 
-    }
+        foodText.text = "Food: " + foodCount.ToString();
+        if (Food)
+        {
+            //foodCount++;
+            // Food.gameObject.SetActive(foodCount > 0);
+            foodDrop.setDraggable(foodCount>0);
+            
+        }
 
-    public void BuyFood()
+        //}
+    }
+        public void BuyFood()
     {
         if (money >= foodPrice)  // Check player has enough money for buy food
         {
             money -= foodPrice; 
-            foodCount += 1; 
+            foodCount += 1;
+            if (Food)
+            {
+                UnityEngine.Debug.Log("Food Found here");
+                
+                Food.SetActive(true);
+            }
             UpdateMoneyDisplay(); 
             UpdateFoodDisplay();  
             Debug.Log("Food bought. Current food count: " + foodCount);
@@ -129,6 +150,7 @@ public class PlayerStatusManager : MonoBehaviour
             petStatusManager.FeedPet(10f, hasFood);  
             UpdateFoodDisplay();  
             Debug.Log("Pet fed. Food count: " + foodCount);
+            
         }
         else
         {

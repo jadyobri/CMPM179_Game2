@@ -14,16 +14,18 @@ public class ItemDragnDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandl
     private RectTransform rectTransform;
     private CanvasGroup canvasGroup;
     private Vector3 startPos;
+    private bool isDraggable;
 
     private void Awake()
     {
+        isDraggable = true;
         rectTransform = GetComponent<RectTransform>();
         canvasGroup = GetComponent<CanvasGroup>();//used to block raycasts during the drag.  Needed if prevent blocking pointer events
         startPos = transform.position;
     }
     public void OnBeginDrag(PointerEventData eventData)
     {
-        
+        if (!isDraggable) return;
         UnityEngine.Debug.Log("starting");
 
 
@@ -33,8 +35,13 @@ public class ItemDragnDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandl
         }
         startPos = transform.position;
     }
+    public void setDraggable(bool draggable)
+    {
+        isDraggable = draggable;
+    }
     public void OnDrag(PointerEventData eventData)
     {
+        if (!isDraggable) return;
         UnityEngine.Debug.Log("dragging");
        
         //We set the globalMousePosition using the cursor location
@@ -53,6 +60,7 @@ public class ItemDragnDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandl
 
     public void OnEndDrag(PointerEventData eventData)
     {
+        
         UnityEngine.Debug.Log("ending");
         if (canvasGroup != null)
         {
@@ -63,11 +71,13 @@ public class ItemDragnDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandl
 
     public void OnPointerDown(PointerEventData eventData)
     {
+        if (!isDraggable) return;
         GameManager.Instance.isPet = true;
         UnityEngine.Debug.Log("pointer");
     }
     public void OnPointerUp(PointerEventData eventData)
     {
+        if (!isDraggable) return;
         GameManager.Instance.isPet = false;
         UnityEngine.Debug.Log("Starting");
     }
