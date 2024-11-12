@@ -13,8 +13,9 @@ public class ItemDragnDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandl
     [SerializeField] private Canvas canvas;
     private RectTransform rectTransform;
     private CanvasGroup canvasGroup;
+    public PlayerStatusManager playerStatusManager;
     private Vector3 startPos;
-    private bool isDraggable;
+    private bool isDraggable;//drag toggle
 
     private void Awake()
     {
@@ -60,19 +61,32 @@ public class ItemDragnDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandl
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        
+       // transform.position = startPos;
+       // {
+        //    transform.position = startPos;
+        //    return;
+        //}
         UnityEngine.Debug.Log("ending");
         if (canvasGroup != null)
         {
             canvasGroup.blocksRaycasts = true;
         }
         transform.position = startPos;
+
     }
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        if (!isDraggable) return;
-        GameManager.Instance.isPet = true;
+        if (!isDraggable)
+        {
+            //run this if for food to tell the player
+            if (gameObject.CompareTag("Food"))
+            {
+                playerStatusManager.FeedPet();
+            }
+            return;
+        }
+            GameManager.Instance.isPet = true;
         UnityEngine.Debug.Log("pointer");
     }
     public void OnPointerUp(PointerEventData eventData)

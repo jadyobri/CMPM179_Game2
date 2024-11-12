@@ -497,6 +497,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canvas: {fileID: 1758625007}
+  playerStatusManager: {fileID: 1185362766}
 --- !u!225 &91942437
 CanvasGroup:
   m_ObjectHideFlags: 0

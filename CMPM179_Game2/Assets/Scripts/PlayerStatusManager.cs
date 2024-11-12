@@ -25,6 +25,7 @@ public class PlayerStatusManager : MonoBehaviour
     public float workMoneyEarned;         // Money earned when working
     public int foodPrice;
     public GameObject Food;
+    private Vector3 startPos;
     public ItemDragnDrop foodDrop;
 
 
@@ -38,6 +39,7 @@ public class PlayerStatusManager : MonoBehaviour
         if (Food)
         {
             foodDrop = Food.GetComponent<ItemDragnDrop>();
+            startPos = Food.transform.position;
         }
         UpdateMoneyDisplay();
         UpdateFoodDisplay();
@@ -111,7 +113,10 @@ public class PlayerStatusManager : MonoBehaviour
         {
             //foodCount++;
             // Food.gameObject.SetActive(foodCount > 0);
+            //foodDrop.OnEndDrag();
+           // Food.transform.position = startPos;
             foodDrop.setDraggable(foodCount>0);
+            
             
         }
 

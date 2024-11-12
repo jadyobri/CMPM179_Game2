@@ -27,19 +27,19 @@ public class CatMovement : MonoBehaviour
 
     void Update()
     {
-       
 
-        if (!GameManager.Instance.isPet)
+        Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        if (!GameManager.Instance.isPet && mousePosition.y < 1)
         {
             // Check if any mouse button is clicked
             if (Input.GetMouseButtonDown(0) || Input.GetMouseButtonDown(1))
             {
                 // Convert mouse position to world position
-                Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+               // Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                 mousePosition.z = 0; // Ensure the z-coordinate remains the same for 2D movement
 
                 targetPosition = new Vector3(mousePosition.x, transform.position.y, mousePosition.z);  // Set the target position to the mouse position
-                Debug.Log("Target Position: " + targetPosition);
+                
 
                 // Flip the cat sprite based on the target position
                 if (targetPosition.x < transform.position.x)  // If the mouse is to the left
