@@ -15,13 +15,17 @@ public class ShowerCollideLogic : MonoBehaviour
         if(showerHead)
         uiObject = showerHead.GetComponent<RectTransform>();
     }
-    void Update()
+    void FixedUpdate()
     {
 
         if (GameManager.Instance.startWater) water.Play();
         else water.Stop();
 
         //moves spray with the shower head itself
+        
+    }
+    private void Update()
+    {
         if (uiObject && water)
         {
             Vector3 worldPos = Camera.main.ScreenToWorldPoint(uiObject.position);
