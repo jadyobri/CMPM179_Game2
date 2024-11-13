@@ -28,7 +28,7 @@ public class ItemDragnDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandl
     {
         if (!isDraggable) return;
         UnityEngine.Debug.Log("starting");
-
+        if (gameObject.CompareTag("Shower")) GameManager.Instance.startWater = true;
 
         if (canvasGroup != null)
         {
@@ -61,11 +61,12 @@ public class ItemDragnDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandl
 
     public void OnEndDrag(PointerEventData eventData)
     {
-       // transform.position = startPos;
-       // {
+        // transform.position = startPos;
+        // {
         //    transform.position = startPos;
         //    return;
         //}
+        if (gameObject.CompareTag("Shower")) GameManager.Instance.startWater = false;
         UnityEngine.Debug.Log("ending");
         if (canvasGroup != null)
         {
@@ -86,12 +87,14 @@ public class ItemDragnDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandl
             }
             return;
         }
-            GameManager.Instance.isPet = true;
+        if (gameObject.CompareTag("Shower")) GameManager.Instance.startWater = true;
+        GameManager.Instance.isPet = true;
         UnityEngine.Debug.Log("pointer");
     }
     public void OnPointerUp(PointerEventData eventData)
     {
         if (!isDraggable) return;
+        if (gameObject.CompareTag("Shower")) GameManager.Instance.startWater = false;
         GameManager.Instance.isPet = false;
         UnityEngine.Debug.Log("Starting");
     }
