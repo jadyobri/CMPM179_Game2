@@ -36,6 +36,7 @@ public class ShowerCollideLogic : MonoBehaviour
     void OnParticleCollision(GameObject other)
     {
         UnityEngine.Debug.Log("Particle collided with " + other.name);
+        if(other.CompareTag("Cat"))  //|| other.name == "Cat")
         petStatusManager.ShowerPet(5f);
         // Additional logic can go here, like reducing health, triggering effects, etc.
     }

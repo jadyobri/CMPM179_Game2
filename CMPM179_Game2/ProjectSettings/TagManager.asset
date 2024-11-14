@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Food
   - Shower
+  - Cat
   layers:
   - Default
   - TransparentFX
