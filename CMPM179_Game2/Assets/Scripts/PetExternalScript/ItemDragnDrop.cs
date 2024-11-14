@@ -6,6 +6,7 @@ using System.Diagnostics;
 //using System.Diagnostics;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.Rendering;
 
 //Multiple Handlers needed to allow Unity style dragging
 public class ItemDragnDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEndDragHandler, IDragHandler, IPointerUpHandler
@@ -66,8 +67,13 @@ public class ItemDragnDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandl
         //    transform.position = startPos;
         //    return;
         //}
-        if (gameObject.CompareTag("Shower")) GameManager.Instance.startWater = false;
-        UnityEngine.Debug.Log("ending");
+        if (gameObject.CompareTag("Shower"))
+        {
+            GameManager.Instance.startWater = false;
+            
+            GameManager.Instance.doneMoving.SetBool("isWalking", false);
+        }
+            UnityEngine.Debug.Log("ending");
         if (canvasGroup != null)
         {
             canvasGroup.blocksRaycasts = true;
@@ -94,7 +100,11 @@ public class ItemDragnDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandl
     public void OnPointerUp(PointerEventData eventData)
     {
         if (!isDraggable) return;
-        if (gameObject.CompareTag("Shower")) GameManager.Instance.startWater = false;
+        if (gameObject.CompareTag("Shower"))
+        {
+            GameManager.Instance.startWater = false;
+            GameManager.Instance.doneMoving.SetBool("isWalking", false);
+        }
         GameManager.Instance.isPet = false;
         UnityEngine.Debug.Log("Starting");
     }

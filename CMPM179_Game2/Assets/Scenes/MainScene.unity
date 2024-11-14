@@ -10522,7 +10522,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 3
+  shower: {fileID: 881447738}
   meow: {fileID: 2124615520}
+  water: {fileID: 2056746508}
+  minX: -9
+  maxX: 9
 --- !u!1 &1592868289
 GameObject:
   m_ObjectHideFlags: 0
