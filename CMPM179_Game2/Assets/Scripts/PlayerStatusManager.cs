@@ -9,7 +9,13 @@ public class PlayerStatusManager : MonoBehaviour
     public Slider mentalHealthBar;
     public Slider energyBar;
     public TextMeshProUGUI moneyText;    
-    public TextMeshProUGUI foodText;    
+    public TextMeshProUGUI foodText;   
+
+    public TextMeshProUGUI playerFoodText; // Display for player food count
+    public TextMeshProUGUI catFoodText;    // Display for cat food count
+
+    public TextMeshProUGUI shopCatFoodText; // Display
+ 
 
     [Header("Status Levels")]
     public float mentalHealth = 100f;
@@ -24,6 +30,12 @@ public class PlayerStatusManager : MonoBehaviour
     public float workEffectEnergy;       // Energy decrease when working
     public float workMoneyEarned;         // Money earned when working
     public int foodPrice;
+
+    [Header("Food and Shop")]
+    public int playerFoodCount = 0;  // Food for player
+    public int catFoodCount = 0;     // Food for cat
+    public int playerFoodPrice = 10; // Price for player food
+    public int catFoodPrice = 20;    // Price for cat food
     public GameObject Food;
     private Vector3 startPos;
     public ItemDragnDrop foodDrop;
@@ -65,20 +77,21 @@ public class PlayerStatusManager : MonoBehaviour
 
     public void Eat()
     {
-        if (foodCount != 0)//if food count is 0, no more food
+        if (playerFoodCount > 0)  // Check if player has food
         {
-            foodCount--;
-            //foodCount;
+            playerFoodCount--;  // Decrease player food count
             energy += eatEffect;
             energy = Mathf.Clamp(energy, 0, 100);
             Debug.Log("Player ate, energy restored.");
-            UpdateFoodDisplay();
+            
+            UpdatePlayerFoodDisplay();  // Update player food text to show the reduced count
         }
         else
         {
             Debug.Log("Buy more food.");
         }
     }
+
 
     public void Work()
     {
@@ -146,22 +159,71 @@ public class PlayerStatusManager : MonoBehaviour
 
     public void FeedPet()
     {
-        bool hasFood = foodCount > 0; // Check if there is food for pet
-        
-        if (hasFood)
+        if (catFoodCount > 0)  // Check if there is cat food available to feed the pet
         {
-            foodCount -= 1; 
-            // Feed the pet and pass the "hasFood" check
-            petStatusManager.FeedPet(10f, hasFood);  
-            UpdateFoodDisplay();  
-            Debug.Log("Pet fed. Food count: " + foodCount);
-            
+            catFoodCount -= 1;  // Decrease cat food count by 1
+            petStatusManager.FeedPet(10f, true);  // Feed the pet, passing hasFood as true
+
+            // Update both shop and pet UI displays
+            UpdateCatFoodDisplay();  // Updates both cat food text fields
+            Debug.Log("Pet fed. Cat food count: " + catFoodCount);
         }
         else
         {
-            petStatusManager.FeedPet(0f, hasFood); // No food, hunger does not change
-            Debug.Log("No food available to feed the pet.");
+            Debug.Log("No cat food available to feed the pet.");
+            petStatusManager.FeedPet(0f, false);  // Notify pet that there's no food
         }
     }
+
+
+    // Method to buy player food
+    public void BuyPlayerFood()
+    {
+        if (money >= playerFoodPrice)
+        {
+            money -= playerFoodPrice;   // Deduct money
+            playerFoodCount += 1;       // Increase player food count
+            UpdateMoneyDisplay();       // Update UI for money
+            UpdatePlayerFoodDisplay();  // Update UI for player food
+            Debug.Log("Player food bought. Player food count: " + playerFoodCount);
+        }
+        else
+        {
+            Debug.Log("Not enough money to buy player food.");
+        }
+    }
+
+    // Method to buy cat food
+    public void BuyCatFood()
+    {
+        if (money >= catFoodPrice)
+        {
+            money -= catFoodPrice;    // Deduct money
+            catFoodCount += 1;        // Increase cat food count
+
+            // Update both the shop and pet UI displays
+            UpdateMoneyDisplay();     // Update money UI
+            UpdateCatFoodDisplay();   // Update both UI displays for cat food
+            Debug.Log("Cat food bought. Cat food count: " + catFoodCount);
+        }
+        else
+        {
+            Debug.Log("Not enough money to buy cat food.");
+        }
+    }
+
+    public void UpdatePlayerFoodDisplay()
+    {
+        playerFoodText.text = "# " + playerFoodCount.ToString();
+    }
+
+    public void UpdateCatFoodDisplay()
+    {
+        // Update both the pet food text and the shop food text
+        catFoodText.text = "# " + catFoodCount.ToString();   // Pet UI food count display
+        shopCatFoodText.text = "# " + catFoodCount.ToString();  // Shop UI food count display
+    }
+
+
 
 }
