@@ -8,6 +8,7 @@ public class PlayerStatusManager : MonoBehaviour
     [Header("UI Elements")]
     public Slider mentalHealthBar;
     public Slider energyBar;
+    public Slider happinessBar;
     public TextMeshProUGUI moneyText;    
     public TextMeshProUGUI foodText;   
 
@@ -20,14 +21,17 @@ public class PlayerStatusManager : MonoBehaviour
     [Header("Status Levels")]
     public float mentalHealth = 100f;
     public float energy = 100f;
+    public float happiness = 100f;
     public float money = 0f;  
     public int foodCount = 0; 
 
     [Header("Action Effects")]
     public float sleepEffect;  // Mental health increase when sleeping
     public float eatEffect;    // Energy increase when eating
+    public float playEffect;
     public float workEffectMentalHealth; // Mental health decrease when working
     public float workEffectEnergy;       // Energy decrease when working
+    public float workEffectHappiness;
     public float workMoneyEarned;         // Money earned when working
     public int foodPrice;
 
@@ -47,6 +51,7 @@ public class PlayerStatusManager : MonoBehaviour
     {
         mentalHealthBar.value = mentalHealth;
         energyBar.value = energy;
+        happinessBar.value = happiness;
         // GameManager.Instance.foodAmount = foodCount;
         if (Food)
         {
@@ -66,6 +71,7 @@ public class PlayerStatusManager : MonoBehaviour
     {
         mentalHealthBar.value = mentalHealth;
         energyBar.value = energy;
+        happinessBar.value = happiness;
     }
 
     public void Sleep()
@@ -99,19 +105,26 @@ public class PlayerStatusManager : MonoBehaviour
         {
             mentalHealth += workEffectMentalHealth; // Decreases mental health
             energy += workEffectEnergy;             // Decreases energy
+            happiness += workEffectHappiness;
             money += workMoneyEarned;               // Adds money when working
 
             mentalHealth = Mathf.Clamp(mentalHealth, 0, 100);
             energy = Mathf.Clamp(energy, 0, 100);
             UpdateMoneyDisplay();
             Debug.Log("Player worked, mental health and energy decreased, money earned.");
-            Debug.Log(energy);
-            Debug.Log(workEffectEnergy);
         }
         else
         {
             Debug.Log("Player too tired. No money earned");
         }
+    }
+
+    public void Play()
+    {
+        happiness += playEffect;
+
+        happiness = Mathf.Clamp(happiness, 0, 100);
+        Debug.Log("Player increased happiness");
     }
 
     void UpdateMoneyDisplay()
