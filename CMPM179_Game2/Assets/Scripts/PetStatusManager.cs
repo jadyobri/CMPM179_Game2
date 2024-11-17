@@ -10,6 +10,7 @@ public class PetStatusManager : MonoBehaviour
     public Slider happinessBar;
 
     public TextMeshProUGUI reactionText;
+    public TextMeshProUGUI warningText; // New warning text field
 
     [Header("Status Levels")]
     public float health = 100f;
@@ -26,9 +27,13 @@ public class PetStatusManager : MonoBehaviour
     // Reference to PlayerStatusManager
     public PlayerStatusManager playerStatusManager;
 
+    // Warning threshold
+    private float warningThreshold = 30f;
+
     void Start()
     {
         decayTimer = decayInterval;
+        warningText.gameObject.SetActive(false); // Hide warning text initially
     }
 
     void Update()
@@ -36,6 +41,7 @@ public class PetStatusManager : MonoBehaviour
         UpdateStatusBars();
         DecayStatuses();
         CheckForJumpScare();
+        DisplayWarningMessage(); // Check and display warning if needed
     }
 
     void UpdateStatusBars()
@@ -65,7 +71,7 @@ public class PetStatusManager : MonoBehaviour
 
     public void FeedPet(float amount, bool hasFood)
     {
-        if (hasFood) // Check if the player has food
+        if (hasFood)
         {
             hunger += amount;
             hunger = Mathf.Clamp(hunger, 0, 100);
@@ -76,7 +82,6 @@ public class PetStatusManager : MonoBehaviour
             DisplayReaction("Meow, I'm hungry but there's no food!");
         }
     }
-
 
     public void PetCat(float amount)
     {
@@ -92,9 +97,9 @@ public class PetStatusManager : MonoBehaviour
         DisplayReaction("Meow healthy!"); 
     }
 
-    public void CheckForJumpScare()
+    void CheckForJumpScare()
     {
-        if (hunger <= 10 || happiness <= 10 || health <= 10) 
+        if (hunger <= 10 || happiness <= 10 || health <= 10)
         {
             TriggerJumpScare();
         }
@@ -103,6 +108,19 @@ public class PetStatusManager : MonoBehaviour
     void TriggerJumpScare()
     {
         Debug.Log("Jump Scare Triggered!");
+    }
+
+    void DisplayWarningMessage()
+    {
+        if (hunger <= warningThreshold || happiness <= warningThreshold || health <= warningThreshold)
+        {
+            warningText.gameObject.SetActive(true);
+            warningText.text = "Warning: Your pet needs attention!";
+        }
+        else
+        {
+            warningText.gameObject.SetActive(false);
+        }
     }
 
     void DisplayReaction(string message)

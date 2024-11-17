@@ -234,7 +234,7 @@ public class PlayerStatusManager : MonoBehaviour
     {
         // Update both the pet food text and the shop food text
         catFoodText.text = "# " + catFoodCount.ToString();   // Pet UI food count display
-        shopCatFoodText.text = "# " + catFoodCount.ToString();  // Shop UI food count display
+        shopCatFoodText.text = "food: " + catFoodCount.ToString();  // Shop UI food count display
     }
 
 
