@@ -37,7 +37,7 @@ public class PlayerStatusManager : MonoBehaviour
 
     [Header("Food and Shop")]
     public int playerFoodCount = 0;  // Food for player
-    public int catFoodCount = 0;     // Food for cat
+    public int catFoodCount = 2;     // Food for cat
     public int playerFoodPrice = 10; // Price for player food
     public int catFoodPrice = 20;    // Price for cat food
     public GameObject Food;
@@ -53,11 +53,11 @@ public class PlayerStatusManager : MonoBehaviour
         energyBar.value = energy;
         happinessBar.value = happiness;
         // GameManager.Instance.foodAmount = foodCount;
-        if (Food)
-        {
-            foodDrop = Food.GetComponent<ItemDragnDrop>();
-            startPos = Food.transform.position;
-        }
+
+       // GameManager.Instance.foodAmount = catFoodCount;
+        startPos = Food.transform.position;
+        foodDrop.setDraggable(catFoodCount > 0);
+
         UpdateMoneyDisplay();
         UpdateFoodDisplay();
     }
@@ -134,17 +134,8 @@ public class PlayerStatusManager : MonoBehaviour
 
     void UpdateFoodDisplay()
     {
-        foodText.text = "Food: " + foodCount.ToString();
-        if (Food)
-        {
-            //foodCount++;
-            // Food.gameObject.SetActive(foodCount > 0);
-            //foodDrop.OnEndDrag();
-           // Food.transform.position = startPos;
-            foodDrop.setDraggable(foodCount>0);
-            
-            
-        }
+        foodText.text = "Food: " + catFoodCount.ToString();
+
 
         //}
     }
@@ -153,7 +144,7 @@ public class PlayerStatusManager : MonoBehaviour
         if (money >= foodPrice)  // Check player has enough money for buy food
         {
             money -= foodPrice; 
-            foodCount += 1;
+            catFoodCount += 1;
             if (Food)
             {
                 UnityEngine.Debug.Log("Food Found here");
@@ -162,7 +153,7 @@ public class PlayerStatusManager : MonoBehaviour
             }
             UpdateMoneyDisplay(); 
             UpdateFoodDisplay();  
-            Debug.Log("Food bought. Current food count: " + foodCount);
+            Debug.Log("Food bought. Current food count: " + catFoodCount);
         }
         else
         {
@@ -235,6 +226,17 @@ public class PlayerStatusManager : MonoBehaviour
         // Update both the pet food text and the shop food text
         catFoodText.text = "# " + catFoodCount.ToString();   // Pet UI food count display
         shopCatFoodText.text = "food: " + catFoodCount.ToString();  // Shop UI food count display
+
+        if (Food)
+        {
+            //foodCount++;
+            // Food.gameObject.SetActive(foodCount > 0);
+            //foodDrop.OnEndDrag();
+            // Food.transform.position = startPos;
+            foodDrop.setDraggable(catFoodCount > 0);
+
+
+        }
     }
 
 
