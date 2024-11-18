@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using TMPro;
 
 public class PetStatusManager : MonoBehaviour
@@ -108,6 +109,7 @@ public class PetStatusManager : MonoBehaviour
     void TriggerJumpScare()
     {
         Debug.Log("Jump Scare Triggered!");
+        SceneManager.LoadScene("GameOver");
     }
 
     void DisplayWarningMessage()
