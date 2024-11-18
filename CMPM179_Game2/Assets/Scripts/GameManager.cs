@@ -26,6 +26,7 @@ public class GameManager : MonoBehaviour
     public bool isPet { get; set; }
     public bool startWater { get; set; }
     public Animator doneMoving { get; set; }
+    public bool canPet { get; set; }
     //    public float heat { get; set; }
     //Then you add it by using this ex: GameManager.Instance.heat = heat
     //This can be used in any file.

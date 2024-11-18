@@ -154,6 +154,19 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -522,7 +535,23 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Glitch-removebg-preview_0: 2766367337020914862
+      Glitch-removebg-preview_1: -1945045637641613781
+      Glitch-removebg-preview_10: -384556212782828335
+      Glitch-removebg-preview_11: 479154771444743142
+      Glitch-removebg-preview_12: -7542425429849927065
+      Glitch-removebg-preview_13: 5350519734536264000
+      Glitch-removebg-preview_14: 5732953170742745921
+      Glitch-removebg-preview_15: 6091363627224695958
+      Glitch-removebg-preview_2: 3458116829949311683
+      Glitch-removebg-preview_3: 4388295398378190953
+      Glitch-removebg-preview_4: 4523039326129438877
+      Glitch-removebg-preview_5: 5062860444670906729
+      Glitch-removebg-preview_6: -8198855639530521281
+      Glitch-removebg-preview_7: 6604478869300922337
+      Glitch-removebg-preview_8: 7365776478729977345
+      Glitch-removebg-preview_9: 7990696296145624258
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
