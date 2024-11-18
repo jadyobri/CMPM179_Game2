@@ -27,7 +27,11 @@ public class ItemDragnDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandl
     }
     public void OnBeginDrag(PointerEventData eventData)
     {
-        if (!isDraggable) return;
+        if (!isDraggable)
+        {
+            eventData.pointerDrag = null;
+            return;
+        }
         UnityEngine.Debug.Log("starting");
         if (gameObject.CompareTag("Shower")) GameManager.Instance.startWater = true;
 
@@ -43,7 +47,10 @@ public class ItemDragnDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandl
     }
     public void OnDrag(PointerEventData eventData)
     {
-        if (!isDraggable) return;
+        if (!isDraggable)
+        {
+            return;
+        }
         UnityEngine.Debug.Log("dragging");
        
         //We set the globalMousePosition using the cursor location
@@ -86,6 +93,7 @@ public class ItemDragnDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandl
     {
         if (!isDraggable)
         {
+            eventData.pointerDrag = null;
             //run this if for food to tell the player
             if (gameObject.CompareTag("Food"))
             {
@@ -99,7 +107,11 @@ public class ItemDragnDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandl
     }
     public void OnPointerUp(PointerEventData eventData)
     {
-        if (!isDraggable) return;
+        if (!isDraggable)
+        {
+            transform.position = startPos;
+            return;
+        }
         if (gameObject.CompareTag("Shower"))
         {
             GameManager.Instance.startWater = false;

@@ -14,7 +14,10 @@ public class FoodLogic : MonoBehaviour, IDropHandler
         //UnityEngine.Debug.Log("Item Dropped on: " + gameObject.tag);
         
         GameObject droppedObject = eventData.pointerDrag;
-        if (playerStatusManager.catFoodCount == 0) return;
+        if (playerStatusManager.catFoodCount == 0) {
+
+            eventData.pointerDrag = null;
+            return; }
         if (droppedObject.CompareTag("Food"))
          {
             
