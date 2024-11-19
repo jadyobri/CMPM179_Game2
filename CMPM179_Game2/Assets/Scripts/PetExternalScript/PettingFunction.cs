@@ -17,15 +17,13 @@ public class PettingFunction : MonoBehaviour, IPointerDownHandler, IBeginDragHan
     public void ablePet()
     {
         GameManager.Instance.audioPlay.PlayOneShot(GameManager.Instance.playTime);
+        petStatusManager.DisplayReaction("Click and drag on me to me pet!");
         GameManager.Instance.canPet = true;
     }
     public void OnBeginDrag(PointerEventData eventData)
     {
         if (!GameManager.Instance.canPet) return;
         GameManager.Instance.audioPlay.PlayOneShot(GameManager.Instance.happyCat);
-        //GameManager.Instance.audioPlay.loop = GameManager.Instance.audioPlay.clip;
-        //GameManager.Instance.audioPlay.Play();
-        UnityEngine.Debug.Log("petting up");
     }
     public void OnDrag(PointerEventData eventData)
     {
@@ -37,21 +35,18 @@ public class PettingFunction : MonoBehaviour, IPointerDownHandler, IBeginDragHan
     {
         if (!GameManager.Instance.canPet) return;
         GameManager.Instance.isPet = false;
-        UnityEngine.Debug.Log("petting up");
     }
 
     public void OnPointerDown(PointerEventData eventData)
     {
         if (!GameManager.Instance.canPet) return;
         GameManager.Instance.isPet = true;
-        UnityEngine.Debug.Log("Starting");
     }
     public void OnPointerUp(PointerEventData eventData)
     {
         if (!GameManager.Instance.canPet) return;
         GameManager.Instance.audioPlay.PlayOneShot(GameManager.Instance.thankMeow);
         GameManager.Instance.isPet = false;
-        UnityEngine.Debug.Log("Starting");
         GameManager.Instance.canPet = false;
     }
 }

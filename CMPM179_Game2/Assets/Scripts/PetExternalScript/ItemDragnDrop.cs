@@ -32,7 +32,6 @@ public class ItemDragnDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandl
             eventData.pointerDrag = null;
             return;
         }
-        UnityEngine.Debug.Log("starting");
         if (gameObject.CompareTag("Shower"))
         {
             GameManager.Instance.audioPlay.clip = GameManager.Instance.showering;
@@ -56,7 +55,6 @@ public class ItemDragnDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandl
         {
             return;
         }
-        UnityEngine.Debug.Log("dragging");
        
         //We set the globalMousePosition using the cursor location
         //followed by converting it into the world coordinates.
@@ -68,17 +66,11 @@ public class ItemDragnDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandl
         {
             rectTransform.position = globalMousePos;
         }
-        UnityEngine.Debug.Log(globalMousePos);
 
     }
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        // transform.position = startPos;
-        // {
-        //    transform.position = startPos;
-        //    return;
-        //}
         if (gameObject.CompareTag("Shower"))
         {
             GameManager.Instance.audioPlay.Stop();
@@ -86,7 +78,6 @@ public class ItemDragnDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandl
             
             GameManager.Instance.doneMoving.SetBool("isWalking", false);
         }
-            UnityEngine.Debug.Log("ending");
         if (canvasGroup != null)
         {
             canvasGroup.blocksRaycasts = true;
@@ -109,7 +100,6 @@ public class ItemDragnDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandl
         }
         if (gameObject.CompareTag("Shower")) GameManager.Instance.startWater = true;
         GameManager.Instance.isPet = true;
-        UnityEngine.Debug.Log("pointer");
     }
     public void OnPointerUp(PointerEventData eventData)
     {
@@ -124,7 +114,6 @@ public class ItemDragnDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandl
             GameManager.Instance.doneMoving.SetBool("isWalking", false);
         }
         GameManager.Instance.isPet = false;
-        UnityEngine.Debug.Log("Starting");
     }
 }
 

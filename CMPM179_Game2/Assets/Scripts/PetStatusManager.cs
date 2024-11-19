@@ -111,7 +111,6 @@ public class PetStatusManager : MonoBehaviour
 
     void TriggerJumpScare()
     {
-        Debug.Log("Jump Scare Triggered!");
         SceneManager.LoadScene("GameOver");
     }
 
@@ -134,7 +133,7 @@ public class PetStatusManager : MonoBehaviour
         }
     }
 
-    void DisplayReaction(string message)
+    public void DisplayReaction(string message)
     {
         reactionText.text = message;
         Invoke("ClearReaction", 2f);
