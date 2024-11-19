@@ -44,6 +44,10 @@ public class GameManager : MonoBehaviour
     public AudioClip happyCat;
     public AudioClip thankMeow;
     public AudioClip snore;
+    public AudioClip workSound;
+    public AudioClip buySound;
+    public AudioClip gamerSound;
+
     //    public float heat { get; set; }
     //Then you add it by using this ex: GameManager.Instance.heat = heat
     //This can be used in any file.

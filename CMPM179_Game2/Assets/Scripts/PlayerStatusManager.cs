@@ -109,6 +109,7 @@ public class PlayerStatusManager : MonoBehaviour
     {
         if (energy >= -(workEffectEnergy) && mentalHealth >= -(workEffectMentalHealth))
         {
+            GameManager.Instance.audioSnore.PlayOneShot(GameManager.Instance.workSound);
             mentalHealth += workEffectMentalHealth; // Decreases mental health
             energy += workEffectEnergy;             // Decreases energy
             happiness += workEffectHappiness;
@@ -128,7 +129,7 @@ public class PlayerStatusManager : MonoBehaviour
     public void Play()
     {
         happiness += playEffect;
-
+        GameManager.Instance.audioSnore.PlayOneShot(GameManager.Instance.gamerSound);
         happiness = Mathf.Clamp(happiness, 0, 100);
         Debug.Log("Player increased happiness");
     }
@@ -149,6 +150,7 @@ public class PlayerStatusManager : MonoBehaviour
     {
         if (money >= foodPrice)  // Check player has enough money for buy food
         {
+            GameManager.Instance.audioSnore.PlayOneShot(GameManager.Instance.buySound);
             money -= foodPrice; 
             catFoodCount += 1;
             if (Food)
@@ -191,6 +193,7 @@ public class PlayerStatusManager : MonoBehaviour
     {
         if (money >= playerFoodPrice)
         {
+            GameManager.Instance.audioSnore.PlayOneShot(GameManager.Instance.buySound);
             money -= playerFoodPrice;   // Deduct money
             playerFoodCount += 1;       // Increase player food count
             UpdateMoneyDisplay();       // Update UI for money
@@ -208,6 +211,7 @@ public class PlayerStatusManager : MonoBehaviour
     {
         if (money >= catFoodPrice)
         {
+            GameManager.Instance.audioSnore.PlayOneShot(GameManager.Instance.buySound);
             money -= catFoodPrice;    // Deduct money
             catFoodCount += 1;        // Increase cat food count
 

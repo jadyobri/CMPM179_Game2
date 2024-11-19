@@ -11345,6 +11345,9 @@ MonoBehaviour:
   happyCat: {fileID: 8300000, guid: b2aa94e5d5f67724d9943b9e8ab4ee53, type: 3}
   thankMeow: {fileID: 8300000, guid: 641330178aefffd4aa74e772402026d5, type: 3}
   snore: {fileID: 8300000, guid: 52b942355f10a1e439a901d80a86c406, type: 3}
+  workSound: {fileID: 8300000, guid: 92a6ae697bdf73040974b1e249f80431, type: 3}
+  buySound: {fileID: 8300000, guid: 3777f13e8f777474a83fb9ba08a9d302, type: 3}
+  gamerSound: {fileID: 8300000, guid: ad2ab75a31321e9488911c14cce77f99, type: 3}
 --- !u!4 &1402673398
 Transform:
   m_ObjectHideFlags: 0
