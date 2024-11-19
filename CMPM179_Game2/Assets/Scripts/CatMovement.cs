@@ -11,7 +11,7 @@ public class CatMovement : MonoBehaviour
     private Vector3 targetPosition; // The target position the cat is moving to
     private bool isWalking;        // Whether the cat is currently walking
 
-    public GameObject shower;
+    public GameObject shower; // shower gameobject/item
     public TextMeshProUGUI meow;
     private RectTransform textRectTransform;
     private RectTransform showerForm;
