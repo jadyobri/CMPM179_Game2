@@ -25,6 +25,8 @@ public class PetStatusManager : MonoBehaviour
     public float decayInterval;
     private float decayTimer;
 
+    private bool warnOnce;
+
     // Reference to PlayerStatusManager
     public PlayerStatusManager playerStatusManager;
 
@@ -35,6 +37,7 @@ public class PetStatusManager : MonoBehaviour
     {
         decayTimer = decayInterval;
         warningText.gameObject.SetActive(false); // Hide warning text initially
+        warnOnce = false;
     }
 
     void Update()
@@ -118,10 +121,16 @@ public class PetStatusManager : MonoBehaviour
         {
             warningText.gameObject.SetActive(true);
             warningText.text = "Warning: Your pet needs attention!";
+            if (warnOnce == false)
+            {
+                GameManager.Instance.audioPlay.PlayOneShot(GameManager.Instance.angryCat);
+                warnOnce = true;
+            }
         }
         else
         {
             warningText.gameObject.SetActive(false);
+            warnOnce = false;
         }
     }
 

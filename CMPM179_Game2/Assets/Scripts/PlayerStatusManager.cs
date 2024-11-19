@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.Audio;
 //using System.Diagnostics;
 
 public class PlayerStatusManager : MonoBehaviour
@@ -49,6 +50,7 @@ public class PlayerStatusManager : MonoBehaviour
 
     void Start()
     {
+
         mentalHealthBar.value = mentalHealth;
         energyBar.value = energy;
         happinessBar.value = happiness;
@@ -64,6 +66,7 @@ public class PlayerStatusManager : MonoBehaviour
 
     void Update()
     {
+        //if (!GameManager.Instance.audioPlay.isPlaying) GameManager.Instance.audioPlay.volume = 0.097f;
         UpdateStatusBars();
     }
 
@@ -77,6 +80,8 @@ public class PlayerStatusManager : MonoBehaviour
     public void Sleep()
     {
         mentalHealth += sleepEffect;
+        GameManager.Instance.audioSnore.PlayOneShot(GameManager.Instance.snore);
+        
         mentalHealth = Mathf.Clamp(mentalHealth, 0, 100); 
         Debug.Log("Player slept, mental health restored.");
     }
@@ -86,6 +91,7 @@ public class PlayerStatusManager : MonoBehaviour
         if (playerFoodCount > 0)  // Check if player has food
         {
             playerFoodCount--;  // Decrease player food count
+            GameManager.Instance.audioPlay.PlayOneShot(GameManager.Instance.playerFood);
             energy += eatEffect;
             energy = Mathf.Clamp(energy, 0, 100);
             Debug.Log("Player ate, energy restored.");

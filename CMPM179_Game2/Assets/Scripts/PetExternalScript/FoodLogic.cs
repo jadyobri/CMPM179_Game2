@@ -18,7 +18,7 @@ public class FoodLogic : MonoBehaviour, IDropHandler
             return; }
         if (droppedObject.CompareTag("Food"))
          {
-            
+            GameManager.Instance.audioPlay.PlayOneShot(GameManager.Instance.catFood);
 
             playerStatusManager.FeedPet();
 

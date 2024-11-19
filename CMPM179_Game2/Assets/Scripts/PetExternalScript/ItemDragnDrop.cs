@@ -33,8 +33,13 @@ public class ItemDragnDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandl
             return;
         }
         UnityEngine.Debug.Log("starting");
-        if (gameObject.CompareTag("Shower")) GameManager.Instance.startWater = true;
-
+        if (gameObject.CompareTag("Shower"))
+        {
+            GameManager.Instance.audioPlay.clip = GameManager.Instance.showering;
+            GameManager.Instance.audioPlay.loop = GameManager.Instance.audioPlay.clip;
+            GameManager.Instance.audioPlay.Play();
+            GameManager.Instance.startWater = true;
+        }
         if (canvasGroup != null)
         {
             canvasGroup.blocksRaycasts = false;
@@ -76,6 +81,7 @@ public class ItemDragnDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandl
         //}
         if (gameObject.CompareTag("Shower"))
         {
+            GameManager.Instance.audioPlay.Stop();
             GameManager.Instance.startWater = false;
             
             GameManager.Instance.doneMoving.SetBool("isWalking", false);
