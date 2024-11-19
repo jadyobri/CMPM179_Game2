@@ -11,7 +11,6 @@ public class CatMovement : MonoBehaviour
     private Vector3 targetPosition; // The target position the cat is moving to
     private bool isWalking;        // Whether the cat is currently walking
 
-
     public GameObject shower;
     public TextMeshProUGUI meow;
     private RectTransform textRectTransform;
@@ -22,7 +21,7 @@ public class CatMovement : MonoBehaviour
     private Vector3 runAway;
     void Start()
     {
-        animator = GetComponent<Animator>();
+        animator = GetComponent<Animator>(); // get animator
         GameManager.Instance.doneMoving = animator;
         targetPosition = transform.position;  // Initially, target is where the cat is
         GameManager.Instance.isPet = false;
